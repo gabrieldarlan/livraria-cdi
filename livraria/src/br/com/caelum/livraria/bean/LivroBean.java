@@ -15,6 +15,7 @@ import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.dao.LivroDao;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
+import br.com.caelum.livraria.tx.Transacional;
 import br.com.caelum.livraria.util.RedirectView;
 
 @Named
@@ -49,7 +50,8 @@ public class LivroBean implements Serializable {
 			return;
 		}
 	}
-
+	
+	@Transacional
 	public void gravar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -88,6 +90,7 @@ public class LivroBean implements Serializable {
 		return new RedirectView("autor");
 	}
 
+	@Transacional
 	public void remove(Livro livro) {
 		try {
 			livroDao.remove(livro);

@@ -9,7 +9,9 @@ import javax.persistence.criteria.CriteriaQuery;
 public class DAO<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	private final Class<T> classe;
+
 	private EntityManager em;
 
 	public DAO(EntityManager manager, Class<T> classe) {
@@ -18,35 +20,17 @@ public class DAO<T> implements Serializable {
 	}
 
 	public void adiciona(T t) {
-
-		// consegue a entity manager
-
-		// abre transacao
-		em.getTransaction().begin();
-
 		// persiste o objeto
 		em.persist(t);
-
-		// commita a transacao
-		em.getTransaction().commit();
-
-		// fecha a entity manager
 	}
 
 	public void remove(T t) {
-		em.getTransaction().begin();
-
 		em.remove(em.merge(t));
-
-		em.getTransaction().commit();
 	}
 
 	public void atualiza(T t) {
-		em.getTransaction().begin();
 
 		em.merge(t);
-
-		em.getTransaction().commit();
 	}
 
 	public List<T> listaTodos() {
