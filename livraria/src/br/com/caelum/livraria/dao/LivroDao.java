@@ -1,5 +1,6 @@
 package br.com.caelum.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,7 +9,9 @@ import javax.persistence.EntityManager;
 
 import br.com.caelum.livraria.modelo.Livro;
 
-public class LivroDao {
+public class LivroDao implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	EntityManager manager;
@@ -40,5 +43,4 @@ public class LivroDao {
 		return dao.buscaPorId(id);
 	}
 
-	
 }
