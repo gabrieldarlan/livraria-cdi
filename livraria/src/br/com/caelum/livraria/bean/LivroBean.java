@@ -102,7 +102,7 @@ public class LivroBean implements Serializable {
 	}
 
 	public void carregar(Livro livro) {
-		this.livro = livro;
+		this.livro = this.livroDao.buscaPorId(livro.getId());
 	}
 
 	public void removeAutorDoLivro(Autor autor) {

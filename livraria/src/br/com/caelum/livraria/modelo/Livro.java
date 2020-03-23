@@ -24,7 +24,8 @@ public class Livro {
 	public double preco;
 	@Temporal(TemporalType.DATE)
 	private Calendar dataLancamento = Calendar.getInstance();
-	@ManyToMany(fetch = FetchType.EAGER)
+
+	@ManyToMany
 	private List<Autor> autores = new ArrayList<Autor>();
 
 	public Integer getId() {
