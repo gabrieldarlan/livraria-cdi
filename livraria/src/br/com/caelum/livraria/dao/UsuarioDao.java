@@ -15,7 +15,7 @@ public class UsuarioDao implements Serializable{
 
 	@Inject
 	EntityManager manager;
-
+	
 	public boolean existe(Usuario usuario) {
 
 		TypedQuery<Usuario> query = manager

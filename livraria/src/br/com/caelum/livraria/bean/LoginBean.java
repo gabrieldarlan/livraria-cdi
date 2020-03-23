@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import br.com.caelum.livraria.dao.UsuarioDao;
 import br.com.caelum.livraria.modelo.Usuario;
+import br.com.caelum.livraria.tx.Transacional;
 import br.com.caelum.livraria.util.RedirectView;
 
 @Named
@@ -21,6 +22,9 @@ public class LoginBean implements Serializable{
 	@Inject
 	private UsuarioDao usuarioDao;
 	
+	@Inject
+	private FacesContext context;
+	
 	private Usuario usuario = new Usuario();
 
 	public Usuario getUsuario() {
@@ -31,9 +35,9 @@ public class LoginBean implements Serializable{
 		this.usuario = usuario;
 	}
 
+	@Transacional
 	public String efetuarLogin() {
 
-		FacesContext context = FacesContext.getCurrentInstance();
 		boolean existe = usuarioDao.existe(this.usuario);
 
 		if (existe) {
@@ -43,12 +47,11 @@ public class LoginBean implements Serializable{
 		}
 
 		context.getExternalContext().getFlash().setKeepMessages(true);
-		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usu√°rio n√£o localizado", null));
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usu·rio n„o localizado", null));
 		return "login?faces-redirect=true";
 	}
 
 	public RedirectView logout() {
-		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().remove("usuarioLogado");
 		return new RedirectView("login");
 	}
